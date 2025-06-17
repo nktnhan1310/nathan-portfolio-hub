@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "projects": {
+    "frontend": {
+      "rootDirectory": "frontend"
+    },
+    "backend": {
+      "rootDirectory": "backend"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/backend/$1"
+    }
+  ]
+}

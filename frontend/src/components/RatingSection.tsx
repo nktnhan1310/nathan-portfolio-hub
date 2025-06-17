@@ -1,12 +1,12 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import RatingModal from '@/components/RatingModal';
 
 interface RatingSectionProps {
   onReviewSubmit: (data: { name: string; email: string; rating: number; comment: string }) => void;
+  isSubmitting?: boolean;
 }
 
-const RatingSection = ({ onReviewSubmit }: RatingSectionProps) => {
+const RatingSection = ({ onReviewSubmit, isSubmitting }: RatingSectionProps) => {
   return (
     <section className="py-12 bg-white/70 backdrop-blur-sm">
       <div className="container mx-auto px-6">
@@ -16,7 +16,7 @@ const RatingSection = ({ onReviewSubmit }: RatingSectionProps) => {
             <CardDescription>Your feedback helps me improve and grow</CardDescription>
           </CardHeader>
           <CardContent className="text-center">
-            <RatingModal onSubmit={onReviewSubmit} />
+            <RatingModal onSubmit={onReviewSubmit} isSubmitting={isSubmitting} />
             <p className="text-xs text-gray-500 mt-4">
               Share your thoughts about working with me
             </p>

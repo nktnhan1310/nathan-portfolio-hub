@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Star, User, Mail, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,9 +8,10 @@ import { useToast } from '@/hooks/use-toast';
 
 interface RatingModalProps {
   onSubmit: (data: { name: string; email: string; rating: number; comment: string }) => void;
+  isSubmitting?: boolean;
 }
 
-const RatingModal = ({ onSubmit }: RatingModalProps) => {
+const RatingModal = ({ onSubmit, isSubmitting }: RatingModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -150,14 +150,16 @@ const RatingModal = ({ onSubmit }: RatingModalProps) => {
               variant="outline"
               onClick={() => setIsOpen(false)}
               className="flex-1"
+              disabled={isSubmitting}
             >
               Cancel
             </Button>
             <Button
               type="submit"
               className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              disabled={isSubmitting}
             >
-              Submit Review
+              {isSubmitting ? 'Submitting...' : 'Submit Review'}
             </Button>
           </div>
         </form>
