@@ -2,12 +2,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
 COPY *.sln .
 COPY PortfolioAPI/*.csproj ./PortfolioAPI/
 RUN dotnet restore
-    
-# Copy everything else and build
+
 COPY PortfolioAPI/. ./PortfolioAPI/
 WORKDIR /app/PortfolioAPI
 RUN dotnet publish -c Release -o out
@@ -16,6 +14,6 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/PortfolioAPI/out ./
-ENV ASPNETCORE_URLS=http://+:10000
+ENV ASPNETCORE_URLS=http://+:${PORT}
 EXPOSE 10000
 ENTRYPOINT ["dotnet", "PortfolioAPI.dll"]
