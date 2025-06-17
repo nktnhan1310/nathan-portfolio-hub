@@ -1,19 +1,27 @@
-# Build stage
+# Use the official .NET SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
+# Copy csproj and restore as distinct layers
 COPY *.sln .
-COPY PortfolioAPI/*.csproj ./PortfolioAPI/
+COPY ./PortfolioApp/*.csproj ./PortfolioApp/
+WORKDIR /app/PortfolioApp
 RUN dotnet restore
 
-COPY PortfolioAPI/. ./PortfolioAPI/
-WORKDIR /app/PortfolioAPI
+# Copy everything else and build
+COPY . .
 RUN dotnet publish -c Release -o out
 
-# Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:9.0
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/PortfolioAPI/out ./
-ENV ASPNETCORE_URLS=http://+:${PORT}
-EXPOSE 10000
-ENTRYPOINT ["dotnet", "PortfolioAPI.dll"]
+COPY --from=build /app/PortfolioApp/out .
+
+# Expose the port (optional but good practice)
+EXPOSE 5000
+
+# Use the PORT from Render
+ENV ASPNETCORE_URLS=http://+:$PORT
+
+# Run the application
+ENTRYPOINT ["dotnet", "PortfolioApp.dll"]

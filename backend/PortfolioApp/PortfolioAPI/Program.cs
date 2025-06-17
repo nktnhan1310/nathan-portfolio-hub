@@ -63,7 +63,7 @@ app.MapPost("/reviews", async (IMediator mediator, ReviewDto dto) =>
     return Results.Created($"/reviews/{review.Id}", review);
 });
 
-//app.Run($"http://0.0.0.0:{Environment.GetEnvironmentVariable("ASPNETCORE_PORT") ?? "3000"}");
-app.Run();
+app.Run($"http://0.0.0.0:{Environment.GetEnvironmentVariable("ASPNETCORE_PORT") ?? "5000"}");
+//app.Run();
 
 public record ReviewDto(string Name, string Email, int Rating, string Comment);
