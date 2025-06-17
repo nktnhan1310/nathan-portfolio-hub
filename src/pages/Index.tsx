@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Mail, Phone, Calendar, MapPin, Star, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,10 +5,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import RatingModal from '@/components/RatingModal';
+import ReviewsSection from '@/components/ReviewsSection';
 
 const Index = () => {
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
+  // State for reviews (in a real app, this would come from a database)
+  const [reviews, setReviews] = useState([
+    {
+      id: '1',
+      name: 'Sarah Johnson',
+      email: 'sarah@example.com',
+      rating: 5,
+      comment: 'Nathan is an exceptional .NET developer. His work on our audit management system was outstanding. Highly professional and delivered exactly what we needed.',
+      createdAt: '2024-01-15'
+    },
+    {
+      id: '2',
+      name: 'Michael Chen',
+      email: 'michael@example.com',
+      rating: 4,
+      comment: 'Great experience working with Nathan. His expertise in .NET Core and API development really helped our project succeed.',
+      createdAt: '2024-01-10'
+    }
+  ]);
 
   const experiences = [
     {
@@ -95,11 +113,18 @@ const Index = () => {
 
   const skills = [".NET Core", "C#", "ASP.NET MVC", "Web API", "Entity Framework", "SQL Server", "Angular", "AngularJS", "JavaScript", "HTML/CSS", "Bootstrap", "Payment Integration", "SAP Integration", "Hangfire", "Windows Applications"];
 
-  const handleStarClick = (starValue: number) => {
-    setRating(starValue);
-    // Note: This will be connected to Supabase API once integration is set up
-    console.log(`Rating submitted: ${starValue}`);
+  const handleReviewSubmit = (data: { name: string; email: string; rating: number; comment: string }) => {
+    const newReview = {
+      id: Date.now().toString(),
+      ...data,
+      createdAt: new Date().toISOString().split('T')[0]
+    };
+    setReviews(prev => [newReview, ...prev]);
   };
+
+  const averageRating = reviews.length > 0 
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length 
+    : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -163,36 +188,13 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <Card className="max-w-md mx-auto shadow-lg border-0 bg-white/80 backdrop-blur-sm">
             <CardHeader className="text-center">
-              <CardTitle className="text-xl font-semibold text-gray-800">Rate My Work</CardTitle>
-              <CardDescription>Your feedback helps me improve</CardDescription>
+              <CardTitle className="text-xl font-semibold text-gray-800">Share Your Experience</CardTitle>
+              <CardDescription>Your feedback helps me improve and grow</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <div className="flex justify-center gap-2 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    onClick={() => handleStarClick(star)}
-                    onMouseEnter={() => setHoverRating(star)}
-                    onMouseLeave={() => setHoverRating(0)}
-                    className="transition-all duration-200 hover:scale-110"
-                  >
-                    <Star
-                      className={`w-8 h-8 ${
-                        star <= (hoverRating || rating)
-                          ? 'fill-yellow-400 text-yellow-400'
-                          : 'text-gray-300 hover:text-yellow-300'
-                      }`}
-                    />
-                  </button>
-                ))}
-              </div>
-              {rating > 0 && (
-                <p className="text-sm text-gray-600 animate-fade-in">
-                  Thank you for rating: {rating} star{rating > 1 ? 's' : ''}!
-                </p>
-              )}
-              <p className="text-xs text-gray-500 mt-2">
-                *Rating system will be connected to Supabase backend
+              <RatingModal onSubmit={handleReviewSubmit} />
+              <p className="text-xs text-gray-500 mt-4">
+                Share your thoughts about working with me
               </p>
             </CardContent>
           </Card>
@@ -302,6 +304,13 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <ReviewsSection 
+        reviews={reviews}
+        averageRating={averageRating}
+        totalReviews={reviews.length}
+      />
 
       {/* Contact Section */}
       <section className="py-16 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white">
