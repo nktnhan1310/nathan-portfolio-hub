@@ -21,13 +21,22 @@ const ContactSection = () => {
             Send Email
           </Button>
           <Button 
-            variant="outline" 
+            variant="secondary" 
             size="lg"
-            className="border-white text-white hover:bg-white hover:text-blue-600 hover:scale-105 transition-all duration-200"
+            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
             onClick={() => window.open('https://linkedin.com/in/nguyen-kim-thanh-nhan-a6a893209', '_blank')}
           >
             <ExternalLink className="w-5 h-5 mr-2" />
             LinkedIn
+          </Button>
+          <Button 
+            variant="secondary" 
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
+            onClick={() => window.open('https://github.com/nktnhan1310', '_blank')}
+          >
+            <ExternalLink className="w-5 h-5 mr-2" />
+            Github
           </Button>
         </div>
       </div>

@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import { reviewsApi, type ReviewInput } from '@/services/reviews';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
+import DownloadPdfButton from '@/components/DownloadPdfButton';
 
 const PAGE_SIZE = 5; // Number of reviews per page
 
@@ -59,11 +60,13 @@ const Index = () => {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      <HeroSection />
-      <SummarySection />
-      <SkillsSection />
-      <ExperienceSection />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative">
+      <div id="portfolio-content">
+        <HeroSection />
+        <SummarySection />
+        <SkillsSection />
+        <ExperienceSection />
+      </div>
       <RatingSection 
         onReviewSubmit={handleReviewSubmit} 
         isSubmitting={submitReviewMutation.isPending}
@@ -79,6 +82,9 @@ const Index = () => {
       />
       <ContactSection />
       <Footer />
+      <div className="download-button">
+        <DownloadPdfButton />
+      </div>
     </div>
   );
 };

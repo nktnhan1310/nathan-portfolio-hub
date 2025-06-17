@@ -61,7 +61,7 @@ const ReviewsSection = ({
     <section className="py-16 bg-gradient-to-r from-gray-50 to-blue-50">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center">
-          Client Reviews & Ratings
+          Reviews & Ratings
         </h2>
         
         {/* Overall Rating Summary */}

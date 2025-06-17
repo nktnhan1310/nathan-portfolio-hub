@@ -1,4 +1,3 @@
-
 import { Calendar, MapPin } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -90,13 +89,22 @@ const ExperienceSection = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-12 text-center">Professional Experience</h2>
+        <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-12 text-center animate-fade-in">
+          <span className="relative inline-block">
+            Work Experience
+            <span className="absolute -bottom-2 left-0 w-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full animate-expand-width"></span>
+          </span>
+        </h2>
         <div className="max-w-5xl mx-auto space-y-8">
           {experiences.map((exp, index) => (
-            <Card key={index} className="shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-blue-50/30">
-              <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-lg">
+            <Card 
+              key={index} 
+              className="shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-blue-50/30 animate-slide-up"
+              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+            >
+              <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-lg group">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                  <div>
+                  <div className="transform transition-transform duration-300 group-hover:translate-x-2">
                     <CardTitle className="text-xl font-bold">{exp.role}</CardTitle>
                     <CardDescription className="text-blue-100 font-medium text-lg">{exp.company}</CardDescription>
                   </div>
@@ -116,19 +124,25 @@ const ExperienceSection = () => {
                 {exp.projects ? (
                   <div className="space-y-6">
                     {exp.projects.map((project, pIndex) => (
-                      <div key={pIndex}>
+                      <div key={pIndex} className="group">
                         <div className="flex items-center gap-2 mb-3">
-                          <h4 className="font-semibold text-gray-800">{project.name}</h4>
+                          <h4 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+                            {project.name}
+                          </h4>
                           {project.duration && (
-                            <Badge variant="outline" className="text-xs">
+                            <Badge variant="outline" className="text-xs group-hover:border-blue-500 transition-colors duration-300">
                               {project.duration}
                             </Badge>
                           )}
                         </div>
                         <ul className="space-y-2">
                           {project.achievements.map((achievement, aIndex) => (
-                            <li key={aIndex} className="flex items-start gap-3 text-gray-700">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <li 
+                              key={aIndex} 
+                              className="flex items-start gap-3 text-gray-700 group-hover:text-gray-900 transition-colors duration-300"
+                              style={{ animationDelay: `${0.3 + (pIndex * 0.1) + (aIndex * 0.05)}s` }}
+                            >
+                              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0 group-hover:scale-125 transition-transform duration-300"></div>
                               <span className="text-sm">{achievement}</span>
                             </li>
                           ))}
@@ -140,8 +154,12 @@ const ExperienceSection = () => {
                 ) : (
                   <ul className="space-y-2">
                     {exp.achievements?.map((achievement, aIndex) => (
-                      <li key={aIndex} className="flex items-start gap-3 text-gray-700">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <li 
+                        key={aIndex} 
+                        className="flex items-start gap-3 text-gray-700 group-hover:text-gray-900 transition-colors duration-300"
+                        style={{ animationDelay: `${0.3 + (aIndex * 0.05)}s` }}
+                      >
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0 group-hover:scale-125 transition-transform duration-300"></div>
                         <span className="text-sm">{achievement}</span>
                       </li>
                     ))}
