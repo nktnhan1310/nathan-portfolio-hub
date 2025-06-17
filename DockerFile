@@ -1,20 +1,31 @@
+# Use .NET 9 runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
 EXPOSE 5000
 
+# Set ASP.NET Core URL binding to the port Railway provides
 ENV ASPNETCORE_URLS=http://+:$PORT
 
+# Build the application
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
-COPY ["backend/PortfolioApp/PortfolioApp.csproj", "backend/PortfolioApp/"]
-WORKDIR "/src/backend/PortfolioApp"
-RUN dotnet restore "PortfolioApp.csproj"
-COPY . .
-RUN dotnet build "PortfolioApp.csproj" -c Release -o /app/build
 
+# Copy the csproj file and restore
+COPY backend/PortfolioApp/PortfolioApp.csproj ./PortfolioApp/
+RUN dotnet restore ./PortfolioApp/PortfolioApp.csproj
+
+# Copy the entire project
+COPY backend/PortfolioApp ./PortfolioApp
+WORKDIR /src/PortfolioApp
+
+# Build the project
+RUN dotnet build -c Release -o /app/build
+
+# Publish the project
 FROM build AS publish
-RUN dotnet publish "PortfolioApp.csproj" -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish
 
+# Final image
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
