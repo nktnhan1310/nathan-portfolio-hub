@@ -1,11 +1,11 @@
 
 import { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
-import RatingSection from '@/components/RatingSection';
 import SummarySection from '@/components/SummarySection';
 import SkillsSection from '@/components/SkillsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import ReviewsSection from '@/components/ReviewsSection';
+import RatingSection from '@/components/RatingSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
@@ -46,7 +46,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <HeroSection />
-      <RatingSection onReviewSubmit={handleReviewSubmit} />
       <SummarySection />
       <SkillsSection />
       <ExperienceSection />
@@ -55,6 +54,7 @@ const Index = () => {
         averageRating={averageRating}
         totalReviews={reviews.length}
       />
+      <RatingSection onReviewSubmit={handleReviewSubmit} />
       <ContactSection />
       <Footer />
     </div>
