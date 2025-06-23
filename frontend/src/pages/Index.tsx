@@ -67,11 +67,8 @@ const Index = () => {
         <SkillsSection />
         <ExperienceSection />
       </div>
-      <RatingSection 
-        onReviewSubmit={handleReviewSubmit} 
-        isSubmitting={submitReviewMutation.isPending}
-      />
-      <ReviewsSection 
+      {
+        reviewsData?.items && <ReviewsSection 
         reviews={reviewsData?.items ?? []}
         averageRating={averageRating}
         totalReviews={reviewsData?.totalItems ?? 0}
@@ -79,7 +76,8 @@ const Index = () => {
         currentPage={currentPage}
         totalPages={reviewsData?.totalPages ?? 0}
         onPageChange={handlePageChange}
-      />
+        />
+      }
       <ContactSection />
       <Footer />
       <div className="download-button">
