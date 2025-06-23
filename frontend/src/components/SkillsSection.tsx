@@ -16,12 +16,18 @@ const SkillsSection = () => {
   ];
 
   const technicalSkills = [
+    ".NET",
     ".NET Core",
     "ASP.NET MVC",
     "Web API",
     "Entity Framework",
     "Entity Framework Core",
     "SQL Server",
+    "PostgreSQL",
+    "MySQL",
+    "Redis",
+    "Kafka",
+    "Docker",
     "Angular",
     "AngularJS",
     "ReactJS",
@@ -29,7 +35,9 @@ const SkillsSection = () => {
     "Hangfire",
     "Windows Applications",
     "Git",
-    "Azure DevOps"
+    "Azure Service Bus",
+    "Azure Functions",
+    "Azure Blob Storage"
   ];
 
   const interpersonalSkills = [
@@ -91,7 +99,7 @@ const SkillsSection = () => {
         <div className="max-w-4xl mx-auto space-y-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center">Skills & Expertise</h2>
           
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 [grid-template-columns:minmax(180px,1fr)_minmax(400px,2fr)_minmax(180px,1fr)]">
             <SkillCategory 
               title="Languages" 
               icon={Languages} 

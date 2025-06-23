@@ -109,8 +109,12 @@ const HeroSection = () => {
           <div className="flex-shrink-0">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
-              <Avatar className="relative w-48 h-48 lg:w-64 lg:h-64 border-4 border-white/20 shadow-2xl">
-                <AvatarImage src="/portfolio_avatar.jpg" alt="Nathan Nguyen" />
+              <Avatar className="relative w-48 h-64 lg:w-48 lg:h-64 border-4 border-white/20 shadow-2xl">
+                <AvatarImage
+                    src="/portfolio_avatar.png"
+                    alt="Nathan Nguyen"
+                    className="object-fill transition-transform duration-300 hover:scale-125"
+                />
                 <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-blue-500 to-purple-600 text-white">NN</AvatarFallback>
               </Avatar>
             </div>
