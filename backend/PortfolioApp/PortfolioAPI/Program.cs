@@ -56,12 +56,12 @@ app.MapGet("/reviews", async (IMediator mediator, int pageNumber = 1, int pageSi
 });
 
 // POST: /reviews
-app.MapPost("/reviews", async (IMediator mediator, ReviewDto dto) =>
-{
-    var command = new CreateReviewCommand(dto.Name, dto.Email, dto.Rating, dto.Comment);
-    var review = await mediator.Send(command);
-    return Results.Created($"/reviews/{review.Id}", review);
-});
+//app.MapPost("/reviews", async (IMediator mediator, ReviewDto dto) =>
+//{
+//    var command = new CreateReviewCommand(dto.Name, dto.Email, dto.Rating, dto.Comment);
+//    var review = await mediator.Send(command);
+//    return Results.Created($"/reviews/{review.Id}", review);
+//});
 
 var aspNetCorePort = Environment.GetEnvironmentVariable("ASPNETCORE_PORT") ?? "5000";
 app.Urls.Add($"http://*:{aspNetCorePort}");
