@@ -24,4 +24,5 @@ obj/
 *.sdf
 *.opensdf
 *.sln.docstates
+**/launchSettings.json
 TestResults/
