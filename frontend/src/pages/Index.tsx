@@ -68,7 +68,7 @@ const Index = () => {
         <ExperienceSection />
       </div>
       {
-        reviewsData?.items && <ReviewsSection 
+        reviewsData?.items?.length > 0 && <ReviewsSection 
         reviews={reviewsData?.items ?? []}
         averageRating={averageRating}
         totalReviews={reviewsData?.totalItems ?? 0}

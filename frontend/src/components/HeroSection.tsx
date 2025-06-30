@@ -74,7 +74,7 @@ const HeroSection = () => {
                 variant="secondary" 
                 size="lg" 
                 className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
-                onClick={() => window.open('https://linkedin.com/in/nguyen-kim-thanh-nhan-a6a893209', '_blank')}
+                onClick={() => window.open('https://www.linkedin.com/in/nhan-nguyen-a6a893209/', '_blank')}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 LinkedIn Profile
