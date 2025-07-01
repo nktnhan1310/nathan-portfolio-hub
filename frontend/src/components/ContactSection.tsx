@@ -1,4 +1,3 @@
-
 import { Mail, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -10,11 +9,11 @@ const ContactSection = () => {
         <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
           Ready to collaborate on your next project? Let's discuss how we can build something amazing together.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
           <Button 
             variant="secondary" 
             size="lg"
-            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
+            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
             onClick={() => window.location.href = 'mailto:nhannkt1995@gmail.com'}
           >
             <Mail className="w-5 h-5 mr-2" />
@@ -23,8 +22,8 @@ const ContactSection = () => {
           <Button 
             variant="secondary" 
             size="lg"
-            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
-            onClick={() => window.open('https://www.linkedin.com/in/nhan-nguyen-a6a893209/', '_blank')}
+            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
+            onClick={() => window.open('https://linkedin.com/in/nguyen-kim-thanh-nhan-a6a893209', '_blank')}
           >
             <ExternalLink className="w-5 h-5 mr-2" />
             LinkedIn
@@ -32,7 +31,7 @@ const ContactSection = () => {
           <Button 
             variant="secondary" 
             size="lg"
-            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
+            className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
             onClick={() => window.open('https://github.com/nktnhan1310', '_blank')}
           >
             <ExternalLink className="w-5 h-5 mr-2" />

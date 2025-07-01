@@ -1,8 +1,26 @@
 import { Mail, Phone, ExternalLink, Sparkles, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useRef, useEffect } from 'react';
 
 const HeroSection = () => {
+  // Ref for the main hero section fade-in
+  const heroRef = useRef<HTMLDivElement>(null);
+  // Ref for the avatar 3D tilt
+  const avatarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // No animation
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    // No animation
+  };
+
+  const handleMouseLeave = () => {
+    // No animation
+  };
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white">
       {/* Animated Background Elements */}
@@ -31,7 +49,7 @@ const HeroSection = () => {
       </div>
 
       <div className="absolute inset-0 bg-black/20"></div>
-      <div className="relative container mx-auto px-6 py-20">
+      <div ref={heroRef} className="relative container mx-auto px-6 py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1 space-y-6 text-center lg:text-left">
             <div className="space-y-4">
@@ -69,11 +87,11 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="flex gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-center lg:justify-start w-full sm:w-auto">
               <Button 
                 variant="secondary" 
                 size="lg" 
-                className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
+                className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
                 onClick={() => window.open('https://www.linkedin.com/in/nhan-nguyen-a6a893209/', '_blank')}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
@@ -82,7 +100,7 @@ const HeroSection = () => {
               <Button 
                 variant="secondary" 
                 size="lg" 
-                className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200"
+                className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
                 onClick={() => window.open('https://github.com/nktnhan1310', '_blank')}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
@@ -107,13 +125,19 @@ const HeroSection = () => {
           </div>
 
           <div className="flex-shrink-0">
-            <div className="relative">
+            <div
+              ref={avatarRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              className="relative will-change-transform"
+              style={{ perspective: 1000 }}
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
               <Avatar className="relative w-48 h-64 lg:w-48 lg:h-64 border-4 border-white/20 shadow-2xl">
                 <AvatarImage
-                    src="/portfolio_avatar.png"
-                    alt="Nathan Nguyen"
-                    className="object-fill transition-transform duration-300 hover:scale-125"
+                  src="/portfolio_avatar.png"
+                  alt="Nathan Nguyen"
+                  className="object-fill transition-transform duration-300 hover:scale-125"
                 />
                 <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-blue-500 to-purple-600 text-white">NN</AvatarFallback>
               </Avatar>
